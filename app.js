@@ -7,3 +7,12 @@ app.get(‘/’, function (req, res) {
 app.listen(port, function () {
  console.log(`Example app listening on port !`);
 });
+app.use(ignoreFavicon);
+
+function ignoreFavicon(req, res, next) {
+  if (req.originalUrl === '/favicon.ico') {
+    res.status(204).json({nope: true});
+  } else {
+    next();
+  }
+}
